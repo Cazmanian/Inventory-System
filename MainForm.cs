@@ -14,6 +14,7 @@ namespace Inventory_System
 
             dgvParts.DataSource = inventory.AllParts;
             dgvProducts.DataSource = inventory.Products;
+
         }
 
 
@@ -31,7 +32,8 @@ namespace Inventory_System
 
         private void btnAddPart_Click(object sender, EventArgs e)
         {
-
+            AddPartForm form = new AddPartForm(inventory);
+            form.ShowDialog();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
