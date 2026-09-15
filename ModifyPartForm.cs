@@ -3,47 +3,52 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace Inventory_System
 {
-    public partial class AddPartForm : Form
+    public partial class ModifyPartForm : Form
     {
         private Inventory inventory;
-        public AddPartForm(Inventory inventory)
+        private Part selectedPart;
+        public ModifyPartForm(Inventory inventory, Part selectedPart)
         {
             InitializeComponent();
-
             this.inventory = inventory;
+            this.selectedPart = selectedPart;
 
-            int nextPartID = inventory.AllParts.Count + 1;
-            txtPartID.Text = nextPartID.ToString();
+            txtPartID.Text = selectedPart.PartID.ToString();
+            txtPartName.Text = selectedPart.Name;
+            txtPartInventory.Text = selectedPart.InStock.ToString();
+            txtPartPrice.Text = selectedPart.Price.ToString();
+            txtPartMin.Text = selectedPart.Min.ToString();
+            txtPartMax.Text = selectedPart.Max.ToString();
 
-        }
+            if (selectedPart is Inhouse inhousePart)
+            {
+                rdoInHouse.Checked = true;
+                txtMachineID.Text = inhousePart.MachineID.ToString();
 
-        private void txtPartID_TextChanged(object sender, EventArgs e)
-        {
+                lblMachineID.Visible = true;
+                txtMachineID.Visible = true;
 
-        }
+                lblCompanyName.Visible = false;
+                txtCompanyName.Visible = false;
+            }
+            else if (selectedPart is Outsourced outsourcedPart)
+            {
+                rdoOutsourced.Checked = true;
+                txtCompanyName.Text = outsourcedPart.CompanyName;
 
-        private void label1_Click(object sender, EventArgs e)
-        {
+                lblMachineID.Visible = false;
+                txtMachineID.Visible = false;
 
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-
+                lblCompanyName.Visible = true;
+                txtCompanyName.Visible = true;
+            }
         }
 
         private void rdoInHouse_CheckedChanged(object sender, EventArgs e)
@@ -55,9 +60,9 @@ namespace Inventory_System
             txtCompanyName.Visible = !rdoInHouse.Checked;
         }
 
-        private void txtMachineID_TextChanged(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-
+            Close();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -91,15 +96,16 @@ namespace Inventory_System
                 MessageBox.Show("Min cannot be greater than Max.");
                 return;
             }
-            
+
             if (inventoryValue < min || inventoryValue > max)
             {
                 MessageBox.Show("Inventory must be between Min and Max.");
                 return;
             }
 
-            int partID = int.Parse(txtPartID.Text);
             string name = txtPartName.Text;
+
+            int index = inventory.AllParts.IndexOf(selectedPart);
 
             if (rdoInHouse.Checked)
             {
@@ -109,9 +115,9 @@ namespace Inventory_System
                     return;
                 }
 
-                Inhouse newPart = new Inhouse
+                Inhouse updatedPart = new Inhouse
                 {
-                    PartID = partID,
+                    PartID = selectedPart.PartID,
                     Name = name,
                     InStock = inventoryValue,
                     Price = price,
@@ -120,15 +126,15 @@ namespace Inventory_System
                     MachineID = machineID
                 };
 
-                inventory.addPart(newPart);
+                inventory.AllParts[index] = updatedPart;
             }
             else
             {
                 string companyName = txtCompanyName.Text;
 
-                Outsourced newPart = new Outsourced
+                Outsourced updatedPart = new Outsourced
                 {
-                    PartID = partID,
+                    PartID = selectedPart.PartID,
                     Name = name,
                     InStock = inventoryValue,
                     Price = price,
@@ -137,31 +143,9 @@ namespace Inventory_System
                     CompanyName = companyName
                 };
 
-                inventory.addPart(newPart);
+                inventory.AllParts[index] = updatedPart;
             }
 
-            Close();
-        }
-        
-
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtCompanyName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
             Close();
         }
     }

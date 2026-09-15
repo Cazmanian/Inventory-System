@@ -70,7 +70,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(651, 68);
+            this.label3.Location = new System.Drawing.Point(721, 68);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 2;
@@ -81,22 +81,22 @@
             this.dgvParts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvParts.Location = new System.Drawing.Point(38, 99);
             this.dgvParts.Name = "dgvParts";
-            this.dgvParts.Size = new System.Drawing.Size(512, 210);
+            this.dgvParts.Size = new System.Drawing.Size(641, 296);
             this.dgvParts.TabIndex = 3;
             // 
             // dgvProducts
             // 
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProducts.Location = new System.Drawing.Point(654, 99);
+            this.dgvProducts.Location = new System.Drawing.Point(724, 99);
             this.dgvProducts.Name = "dgvProducts";
-            this.dgvProducts.Size = new System.Drawing.Size(517, 210);
+            this.dgvProducts.Size = new System.Drawing.Size(635, 296);
             this.dgvProducts.TabIndex = 4;
             // 
             // btnAddPart
             // 
-            this.btnAddPart.Location = new System.Drawing.Point(310, 315);
+            this.btnAddPart.Location = new System.Drawing.Point(442, 411);
             this.btnAddPart.Name = "btnAddPart";
-            this.btnAddPart.Size = new System.Drawing.Size(75, 29);
+            this.btnAddPart.Size = new System.Drawing.Size(75, 38);
             this.btnAddPart.TabIndex = 5;
             this.btnAddPart.Text = "Add";
             this.btnAddPart.UseVisualStyleBackColor = true;
@@ -104,25 +104,27 @@
             // 
             // btnModifyPart
             // 
-            this.btnModifyPart.Location = new System.Drawing.Point(391, 315);
+            this.btnModifyPart.Location = new System.Drawing.Point(523, 411);
             this.btnModifyPart.Name = "btnModifyPart";
-            this.btnModifyPart.Size = new System.Drawing.Size(75, 29);
+            this.btnModifyPart.Size = new System.Drawing.Size(75, 38);
             this.btnModifyPart.TabIndex = 6;
             this.btnModifyPart.Text = "Modify";
             this.btnModifyPart.UseVisualStyleBackColor = true;
+            this.btnModifyPart.Click += new System.EventHandler(this.btnModifyPart_Click);
             // 
             // btnDeletePart
             // 
-            this.btnDeletePart.Location = new System.Drawing.Point(472, 315);
+            this.btnDeletePart.Location = new System.Drawing.Point(604, 411);
             this.btnDeletePart.Name = "btnDeletePart";
-            this.btnDeletePart.Size = new System.Drawing.Size(75, 29);
+            this.btnDeletePart.Size = new System.Drawing.Size(75, 38);
             this.btnDeletePart.TabIndex = 7;
             this.btnDeletePart.Text = "Delete";
             this.btnDeletePart.UseVisualStyleBackColor = true;
+            this.btnDeletePart.Click += new System.EventHandler(this.btnDeletePart_Click);
             // 
             // btnSearchPart
             // 
-            this.btnSearchPart.Location = new System.Drawing.Point(279, 64);
+            this.btnSearchPart.Location = new System.Drawing.Point(410, 64);
             this.btnSearchPart.Name = "btnSearchPart";
             this.btnSearchPart.Size = new System.Drawing.Size(75, 29);
             this.btnSearchPart.TabIndex = 8;
@@ -131,41 +133,41 @@
             // 
             // txtPartSearch
             // 
-            this.txtPartSearch.Location = new System.Drawing.Point(360, 68);
+            this.txtPartSearch.Location = new System.Drawing.Point(491, 68);
             this.txtPartSearch.Name = "txtPartSearch";
             this.txtPartSearch.Size = new System.Drawing.Size(190, 20);
             this.txtPartSearch.TabIndex = 9;
             // 
             // btnAddProduct
             // 
-            this.btnAddProduct.Location = new System.Drawing.Point(934, 315);
+            this.btnAddProduct.Location = new System.Drawing.Point(1122, 411);
             this.btnAddProduct.Name = "btnAddProduct";
-            this.btnAddProduct.Size = new System.Drawing.Size(75, 29);
+            this.btnAddProduct.Size = new System.Drawing.Size(75, 38);
             this.btnAddProduct.TabIndex = 10;
             this.btnAddProduct.Text = "Add";
             this.btnAddProduct.UseVisualStyleBackColor = true;
             // 
             // btnModifyProduct
             // 
-            this.btnModifyProduct.Location = new System.Drawing.Point(1015, 315);
+            this.btnModifyProduct.Location = new System.Drawing.Point(1203, 411);
             this.btnModifyProduct.Name = "btnModifyProduct";
-            this.btnModifyProduct.Size = new System.Drawing.Size(75, 29);
+            this.btnModifyProduct.Size = new System.Drawing.Size(75, 38);
             this.btnModifyProduct.TabIndex = 11;
             this.btnModifyProduct.Text = "Modify";
             this.btnModifyProduct.UseVisualStyleBackColor = true;
             // 
             // btnDeleteProduct
             // 
-            this.btnDeleteProduct.Location = new System.Drawing.Point(1096, 315);
+            this.btnDeleteProduct.Location = new System.Drawing.Point(1284, 411);
             this.btnDeleteProduct.Name = "btnDeleteProduct";
-            this.btnDeleteProduct.Size = new System.Drawing.Size(75, 29);
+            this.btnDeleteProduct.Size = new System.Drawing.Size(75, 38);
             this.btnDeleteProduct.TabIndex = 12;
             this.btnDeleteProduct.Text = "Delete";
             this.btnDeleteProduct.UseVisualStyleBackColor = true;
             // 
             // btnSearchProduct
             // 
-            this.btnSearchProduct.Location = new System.Drawing.Point(900, 64);
+            this.btnSearchProduct.Location = new System.Drawing.Point(1090, 63);
             this.btnSearchProduct.Name = "btnSearchProduct";
             this.btnSearchProduct.Size = new System.Drawing.Size(75, 29);
             this.btnSearchProduct.TabIndex = 13;
@@ -174,14 +176,14 @@
             // 
             // txtProductSearch
             // 
-            this.txtProductSearch.Location = new System.Drawing.Point(981, 69);
+            this.txtProductSearch.Location = new System.Drawing.Point(1171, 68);
             this.txtProductSearch.Name = "txtProductSearch";
             this.txtProductSearch.Size = new System.Drawing.Size(190, 20);
             this.txtProductSearch.TabIndex = 14;
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(1096, 401);
+            this.btnExit.Location = new System.Drawing.Point(1284, 497);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 39);
             this.btnExit.TabIndex = 15;
@@ -192,7 +194,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1203, 505);
+            this.ClientSize = new System.Drawing.Size(1388, 548);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.txtProductSearch);
             this.Controls.Add(this.btnSearchProduct);
