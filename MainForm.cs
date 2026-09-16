@@ -83,5 +83,13 @@ namespace Inventory_System
                     dgvParts.Refresh();
                 }
         }
+
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+            AddProductForm form = new AddProductForm(inventory);
+            form.ShowDialog();
+
+            dgvProducts.Refresh();
+        }
     }
 }
