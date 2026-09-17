@@ -165,5 +165,16 @@ namespace Inventory_System
             dgvAllParts.DataSource = null;
             dgvAllParts.DataSource = searchResults;
         }
+
+        private void txtPartSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtPartSearch.Text))
+            {
+                searchResults = new BindingList<Part>(inventory.AllParts);
+
+                dgvAllParts.DataSource = null;
+                dgvAllParts.DataSource = searchResults;
+            }
+        }
     }
 }

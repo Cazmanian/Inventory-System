@@ -207,5 +207,21 @@ namespace Inventory_System
         {
             Close();
         }
+
+        private void txtPartSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtPartSearch.Text))
+            {
+                RefreshPartGrid();
+            }
+        }
+
+        private void txtProductSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtProductSearch.Text))
+            {
+                RefreshProductGrid();
+            }
+        }
     }
 }

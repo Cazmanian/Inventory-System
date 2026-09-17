@@ -70,6 +70,7 @@
             this.txtPartSearch.Name = "txtPartSearch";
             this.txtPartSearch.Size = new System.Drawing.Size(175, 20);
             this.txtPartSearch.TabIndex = 38;
+            this.txtPartSearch.TextChanged += new System.EventHandler(this.txtPartSearch_TextChanged);
             // 
             // btnSave
             // 

@@ -138,6 +138,7 @@
             this.txtPartSearch.Name = "txtPartSearch";
             this.txtPartSearch.Size = new System.Drawing.Size(190, 20);
             this.txtPartSearch.TabIndex = 9;
+            this.txtPartSearch.TextChanged += new System.EventHandler(this.txtPartSearch_TextChanged);
             // 
             // btnAddProduct
             // 
@@ -185,6 +186,7 @@
             this.txtProductSearch.Name = "txtProductSearch";
             this.txtProductSearch.Size = new System.Drawing.Size(190, 20);
             this.txtProductSearch.TabIndex = 14;
+            this.txtProductSearch.TextChanged += new System.EventHandler(this.txtProductSearch_TextChanged);
             // 
             // btnExit
             // 
