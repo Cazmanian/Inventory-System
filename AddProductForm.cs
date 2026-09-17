@@ -14,18 +14,26 @@ namespace Inventory_System
     {
         private Inventory inventory;
         private Product product;
+
+        private BindingList<Part> searchResults;
         public AddProductForm(Inventory inventory)
         {
             InitializeComponent();
 
             this.inventory = inventory;
             product = new Product();
+            searchResults = new BindingList<Part>(inventory.AllParts);
 
 
-            int nextProductID = inventory.Products.Count + 1;
+            int nextProductID = 1;
+
+            while (inventory.lookupProduct(nextProductID) != null)
+            {
+                nextProductID++;
+            }
             txtProductID.Text = nextProductID.ToString();
 
-            dgvAllParts.DataSource = inventory.AllParts;
+            dgvAllParts.DataSource = searchResults;
             dgvAssociatedParts.DataSource = product.AssociatedParts;
         }
 
@@ -136,6 +144,26 @@ namespace Inventory_System
             Close();
         }
 
+        private void btnSearchPart_Click(object sender, EventArgs e)
+        {
+            string searchText = txtPartSearch.Text.Trim();
 
+            BindingList<Part> filteredParts = new BindingList<Part>();
+
+            foreach (Part part in inventory.AllParts)
+            {
+                if (searchText == "" ||
+                    part.PartID.ToString().Contains(searchText) ||
+                    part.Name.ToLower().Contains(searchText.ToLower()))
+                {
+                    filteredParts.Add(part);
+                }
+            }
+
+            searchResults = filteredParts;
+
+            dgvAllParts.DataSource = null;
+            dgvAllParts.DataSource = searchResults;
+        }
     }
 }

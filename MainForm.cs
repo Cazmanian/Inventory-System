@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Inventory_System
@@ -6,15 +7,39 @@ namespace Inventory_System
     public partial class MainForm : Form
     {
         private Inventory inventory;
+
+        private BindingList<Part> partSearchResults;
+        private BindingList<Product> productSearchResults;
         public MainForm()
         {
             InitializeComponent();
 
             inventory = new Inventory();
 
-            dgvParts.DataSource = inventory.AllParts;
-            dgvProducts.DataSource = inventory.Products;
+            partSearchResults =
+                new BindingList<Part>(inventory.AllParts);
 
+            productSearchResults =
+                new BindingList<Product>(inventory.Products);
+
+            dgvParts.DataSource = partSearchResults;
+            dgvProducts.DataSource = productSearchResults;
+        }
+
+            private void RefreshPartGrid()
+        {
+            partSearchResults = new BindingList<Part>(inventory.AllParts);
+
+            dgvParts.DataSource = null;
+            dgvParts.DataSource = partSearchResults;
+        }
+
+        private void RefreshProductGrid()
+        {
+            productSearchResults = new BindingList<Product>(inventory.Products);
+
+            dgvProducts.DataSource = null;
+            dgvProducts.DataSource = productSearchResults;
         }
 
 
@@ -29,7 +54,7 @@ namespace Inventory_System
             AddPartForm form = new AddPartForm(inventory);
             form.ShowDialog();
 
-            dgvParts.Refresh();
+            RefreshPartGrid();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -49,7 +74,7 @@ namespace Inventory_System
             ModifyPartForm form = new ModifyPartForm(inventory, selectedPart);
             form.ShowDialog();
 
-            dgvParts.Refresh();
+            RefreshPartGrid();
         }
 
         private void btnDeletePart_Click(object sender, EventArgs e)
@@ -80,8 +105,8 @@ namespace Inventory_System
                 if (result == DialogResult.Yes)
                 {
                     inventory.deletePart(selectedPart);
-                    dgvParts.Refresh();
-                }
+                    RefreshPartGrid();
+            }
         }
 
         private void btnAddProduct_Click(object sender, EventArgs e)
@@ -89,7 +114,93 @@ namespace Inventory_System
             AddProductForm form = new AddProductForm(inventory);
             form.ShowDialog();
 
-            dgvProducts.Refresh();
+            RefreshProductGrid();
+        }
+
+        private void btnModifyProduct_Click(object sender, EventArgs e)
+        {
+            if (dgvProducts.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a product first.");
+                return;
+            }
+
+            Product selectedProduct =
+                (Product)dgvProducts.CurrentRow.DataBoundItem;
+
+            ModifyProductForm form =
+                new ModifyProductForm(inventory, selectedProduct);
+
+            form.ShowDialog();
+
+            RefreshProductGrid();
+        }
+
+        private void btnDeleteProduct_Click(object sender, EventArgs e)
+        {
+            if (dgvProducts.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a product first.");
+                return;
+            }
+
+            Product selectedProduct = (Product)dgvProducts.CurrentRow.DataBoundItem;
+
+            DialogResult result = MessageBox.Show("Are you sure you want to delete this product?","Confirm Delete",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                inventory.removeProduct(selectedProduct.ProductID);
+                RefreshProductGrid();
+            }
+        }
+
+        private void btnSearchPart_Click(object sender, EventArgs e)
+        {
+            string searchText = txtPartSearch.Text.Trim();
+
+            BindingList<Part> filteredParts =
+                new BindingList<Part>();
+
+            foreach (Part part in inventory.AllParts)
+            {
+                if (searchText == "" ||
+                    part.PartID.ToString().Contains(searchText) ||
+                    part.Name.ToLower().Contains(searchText.ToLower()))
+                {
+                    filteredParts.Add(part);
+                }
+            }
+
+            partSearchResults = filteredParts;
+
+            dgvParts.DataSource = null;
+            dgvParts.DataSource = partSearchResults;
+        }
+
+        private void btnSearchProduct_Click(object sender, EventArgs e)
+        {
+            string searchText = txtProductSearch.Text.Trim();
+
+            BindingList<Product> filteredProducts =
+                new BindingList<Product>();
+
+            foreach (Product product in inventory.Products)
+            {
+                if (searchText == "" ||
+                    product.ProductID.ToString().Contains(searchText) ||
+                    product.Name.ToLower().Contains(searchText.ToLower()))
+                {
+                    filteredProducts.Add(product);
+                }
+            }
+
+            productSearchResults = filteredProducts;
+
+            dgvProducts.DataSource = null;
+            dgvProducts.DataSource = productSearchResults;
         }
     }
 }

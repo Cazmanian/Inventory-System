@@ -21,7 +21,13 @@ namespace Inventory_System
 
             this.inventory = inventory;
 
-            int nextPartID = inventory.AllParts.Count + 1;
+            int nextPartID = 1;
+
+            while (inventory.lookupPart(nextPartID) != null)
+            {
+                nextPartID++;
+            }
+
             txtPartID.Text = nextPartID.ToString();
 
         }

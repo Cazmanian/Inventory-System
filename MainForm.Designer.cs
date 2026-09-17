@@ -130,6 +130,7 @@
             this.btnSearchPart.TabIndex = 8;
             this.btnSearchPart.Text = "Search";
             this.btnSearchPart.UseVisualStyleBackColor = true;
+            this.btnSearchPart.Click += new System.EventHandler(this.btnSearchPart_Click);
             // 
             // txtPartSearch
             // 
@@ -156,6 +157,7 @@
             this.btnModifyProduct.TabIndex = 11;
             this.btnModifyProduct.Text = "Modify";
             this.btnModifyProduct.UseVisualStyleBackColor = true;
+            this.btnModifyProduct.Click += new System.EventHandler(this.btnModifyProduct_Click);
             // 
             // btnDeleteProduct
             // 
@@ -165,6 +167,7 @@
             this.btnDeleteProduct.TabIndex = 12;
             this.btnDeleteProduct.Text = "Delete";
             this.btnDeleteProduct.UseVisualStyleBackColor = true;
+            this.btnDeleteProduct.Click += new System.EventHandler(this.btnDeleteProduct_Click);
             // 
             // btnSearchProduct
             // 
@@ -174,6 +177,7 @@
             this.btnSearchProduct.TabIndex = 13;
             this.btnSearchProduct.Text = "Search";
             this.btnSearchProduct.UseVisualStyleBackColor = true;
+            this.btnSearchProduct.Click += new System.EventHandler(this.btnSearchProduct_Click);
             // 
             // txtProductSearch
             // 

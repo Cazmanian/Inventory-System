@@ -104,8 +104,9 @@ namespace Inventory_System
             }
 
             string name = txtPartName.Text;
+            int partID = selectedPart.PartID;
 
-            int index = inventory.AllParts.IndexOf(selectedPart);
+            Part updatedPart;
 
             if (rdoInHouse.Checked)
             {
@@ -115,9 +116,9 @@ namespace Inventory_System
                     return;
                 }
 
-                Inhouse updatedPart = new Inhouse
+                updatedPart = new Inhouse
                 {
-                    PartID = selectedPart.PartID,
+                    PartID = partID,
                     Name = name,
                     InStock = inventoryValue,
                     Price = price,
@@ -125,26 +126,22 @@ namespace Inventory_System
                     Max = max,
                     MachineID = machineID
                 };
-
-                inventory.AllParts[index] = updatedPart;
             }
             else
             {
-                string companyName = txtCompanyName.Text;
-
-                Outsourced updatedPart = new Outsourced
+                updatedPart = new Outsourced
                 {
-                    PartID = selectedPart.PartID,
+                    PartID = partID,
                     Name = name,
                     InStock = inventoryValue,
                     Price = price,
                     Min = min,
                     Max = max,
-                    CompanyName = companyName
+                    CompanyName = txtCompanyName.Text
                 };
-
-                inventory.AllParts[index] = updatedPart;
             }
+
+            inventory.updatePart(partID, updatedPart);
 
             Close();
         }

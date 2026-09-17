@@ -88,14 +88,12 @@ public class Inventory
     public void updatePart (int partID, Part updatedPart)
     {
         Part existingPart = lookupPart(partID);
-        
+
         if (existingPart != null)
         {
-            existingPart.Name = updatedPart.Name;
-            existingPart.Price = updatedPart.Price;
-            existingPart.InStock = updatedPart.InStock;
-            existingPart.Min = updatedPart.Min;
-            existingPart.Max = updatedPart.Max;
+            int index = AllParts.IndexOf(existingPart);
+
+            AllParts[index] = updatedPart;
         }
     }
 }
