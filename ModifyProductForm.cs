@@ -97,65 +97,56 @@ namespace Inventory_System
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(
-    txtProductInventory.Text,
-    out int inventoryValue))
+            if (!int.TryParse(txtProductInventory.Text, out int inventoryValue))
             {
-                MessageBox.Show(
-                    "Inventory must be a whole number.");
+                MessageBox.Show("Inventory must be a whole number.");
                 return;
             }
 
-            if (!decimal.TryParse(
-                txtProductPrice.Text,
-                out decimal price))
+            if (!decimal.TryParse(txtProductPrice.Text, out decimal price))
             {
-                MessageBox.Show(
-                    "Price must be a number.");
+                MessageBox.Show("Price must be a number.");
                 return;
             }
 
-            if (!int.TryParse(
-                txtProductMax.Text,
-                out int max))
+            if (!int.TryParse(txtProductMax.Text, out int max))
             {
-                MessageBox.Show(
-                    "Max must be a whole number.");
+                MessageBox.Show("Max must be a whole number.");
                 return;
             }
 
-            if (!int.TryParse(
-                txtProductMin.Text,
-                out int min))
+            if (!int.TryParse(txtProductMin.Text, out int min))
             {
-                MessageBox.Show(
-                    "Min must be a whole number.");
+                MessageBox.Show("Min must be a whole number.");
                 return;
             }
 
             if (min > max)
             {
-                MessageBox.Show(
-                    "Min cannot be greater than Max.");
+                MessageBox.Show("Min cannot be greater than Max.");
                 return;
             }
 
             if (inventoryValue < min ||
                 inventoryValue > max)
             {
-                MessageBox.Show(
-                    "Inventory must be between Min and Max.");
+                MessageBox.Show("Inventory must be between Min and Max.");
                 return;
             }
 
-            selectedProduct.Name = txtProductName.Text;
-            selectedProduct.InStock = inventoryValue;
-            selectedProduct.Price = price;
-            selectedProduct.Min = min;
-            selectedProduct.Max = max;
+            Product updatedProduct = new Product
+            {
+                ProductID = selectedProduct.ProductID,
+                Name = txtProductName.Text,
+                InStock = inventoryValue,
+                Price = price,
+                Min = min,
+                Max = max,
+                AssociatedParts =
+                    new BindingList<Part>(tempAssociatedParts)
+            };
 
-            selectedProduct.AssociatedParts =
-                new BindingList<Part>(tempAssociatedParts);
+            inventory.updateProduct(selectedProduct.ProductID,updatedProduct);
 
             Close();
         }
@@ -169,8 +160,7 @@ namespace Inventory_System
                 return;
             }
 
-            Part selectedPart =
-                (Part)dgvAssociatedParts.CurrentRow.DataBoundItem;
+            Part selectedPart = (Part)dgvAssociatedParts.CurrentRow.DataBoundItem;
 
             tempAssociatedParts.Remove(selectedPart);
 

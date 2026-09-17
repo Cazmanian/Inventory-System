@@ -202,5 +202,10 @@ namespace Inventory_System
             dgvProducts.DataSource = null;
             dgvProducts.DataSource = productSearchResults;
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -49,12 +49,9 @@ public class Inventory
 
         if (existingProduct != null)
         {
-            existingProduct.Name = updatedProduct.Name;
-            existingProduct.Price = updatedProduct.Price;
-            existingProduct.InStock = updatedProduct.InStock;
-            existingProduct.Min = updatedProduct.Min;
-            existingProduct.Max = updatedProduct.Max;
-            existingProduct.AssociatedParts = updatedProduct.AssociatedParts;
+            int index = Products.IndexOf(existingProduct);
+
+            Products[index] = updatedProduct;
         }
     }
 
