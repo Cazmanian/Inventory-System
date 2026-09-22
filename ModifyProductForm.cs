@@ -57,8 +57,7 @@ namespace Inventory_System
             if (tempAssociatedParts.Any(
                 p => p.PartID == selectedPart.PartID))
             {
-                MessageBox.Show(
-                    "This part is already associated with the product.");
+                MessageBox.Show("This part is already associated with the product.");
                 return;
             }
 
@@ -71,14 +70,11 @@ namespace Inventory_System
         {
             string searchText = txtPartSearch.Text.Trim();
 
-            BindingList<Part> filteredParts =
-                new BindingList<Part>();
+            BindingList<Part> filteredParts = new BindingList<Part>();
 
             foreach (Part part in inventory.AllParts)
             {
-                if (searchText == "" ||
-                    part.PartID.ToString().Contains(searchText) ||
-                    part.Name.ToLower().Contains(searchText.ToLower()))
+                if (searchText == "" || part.PartID.ToString().Contains(searchText) || part.Name.ToLower().Contains(searchText.ToLower()))
                 {
                     filteredParts.Add(part);
                 }
@@ -155,8 +151,7 @@ namespace Inventory_System
         {
             if (dgvAssociatedParts.CurrentRow == null)
             {
-                MessageBox.Show(
-                    "Please select an associated part first.");
+                MessageBox.Show("Please select an associated part first.");
                 return;
             }
 
